@@ -202,8 +202,8 @@ width:30px
 }
 #submit2{
   position: absolute;
-  top:70vh;
-  left:65vw;
+  top:70%;
+  left:65%;
   height:30px;
   background-color: #0a1c4dff;
   border-radius:5px;
