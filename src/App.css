@@ -42,7 +42,7 @@ gap:10px
 #events{
 padding:20px;
 display: flex;
-gap:20px;
+gap:40px;
 flex-wrap: wrap;
 }
 #date{
@@ -165,10 +165,18 @@ textarea{
   margin-top: 120px;
   gap:20px
 }
+@keyframes rotate{
+  from {
+    transform:rotate(0deg)
+  }
+  to {
+    transform:rotate(360deg)
+  }
+}
 @media (max-width:601px){
   #e{
 height:250px;
-width:110px;
+width:120px;
 border:2px solid black;
 border-radius:5px;
 display: flex;
@@ -181,7 +189,8 @@ gap:5px
 height:70px;
 width:70px;
 }
-
+#events{
+gap:10px;}
 #title{
   font-size: 20px;
 }
