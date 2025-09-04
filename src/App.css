@@ -116,7 +116,7 @@ border:2px solid black
   border:8px solid black;
   border-radius:50%;
   border-top-color:red;
-  animation:rotate 1s linear 5;
+  animation:rotate 1s linear infinite;
   left:46%;
   top:35%;
 }
