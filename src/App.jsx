@@ -122,7 +122,7 @@ return(
   <div id='e'>
     <img id='emg' src={ele.image}></img>
     <h1 id='title'>{ele.name}</h1>
-    <h2 id='date'>📅 {ele.date}</h2>
+    <h2 id='date'>{ele.date}</h2>
     <p id='dis'>{ele.discription}
 </p>
   </div>
