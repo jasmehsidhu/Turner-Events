@@ -167,7 +167,7 @@ textarea{
 @media (max-width:601px){
   #e{
 height:200px;
-width:100px;
+width:110px;
 border:2px solid black;
 border-radius:5px;
 display: flex;
