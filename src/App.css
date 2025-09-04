@@ -187,7 +187,7 @@ width:70px;
 }
 #date{
   font-size: 13px;
-      margin-top: -5px;
+      margin-top: -25px;
 
 }
 #types{
@@ -203,6 +203,10 @@ width:30px
 #count{
   margin-right: 72%;
 }
+  #dis{
+    margin-top:-15px
+  }
+    
 #submit2{
   position: absolute;
   top:3%;
