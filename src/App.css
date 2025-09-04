@@ -48,7 +48,7 @@ flex-wrap: wrap;
 #date{
  font-family: "Afacad Flux", sans-serif;
     font-size: 18px;
-    margin-top: -10px;
+    margin-top: -20px;
 }
 #namea{
  font-family: "Afacad Flux", sans-serif;
@@ -134,6 +134,9 @@ border:2px solid black
   color:green;
      font-family: "Afacad Flux", sans-serif;
 
+}
+#dis{
+  margin-top:-10px
 }
 #submit{
   height:30px;
