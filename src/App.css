@@ -172,7 +172,7 @@ border:2px solid black
   left:82%;
   height:30px;
   display: flex;
-  gap:10px
+  gap:20px
  }
  #peek>button{
    background-color: white;
@@ -339,7 +339,7 @@ padding:40px;
  font-size: 13px;
   }
   #e{
-height:300px;
+height:290px;
 width:120px;
 border:2px solid black;
 border-radius:5px;
@@ -409,11 +409,17 @@ width:50px
     height:80px;
   }
   #date,#dis{
-  margin-top:-23px
+  margin-top:-18px
 }
-  #submit3{
+#submit3{
   margin-top:-15px
 }
+ #peek>button{
+   background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:130px;
+ }
 }
 @media (max-width:400px){
   #heading{
