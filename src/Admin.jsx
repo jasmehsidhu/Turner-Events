@@ -114,7 +114,7 @@ async function adadd(){
             <button onClick={dele} id='delete'>Delete Events</button>
 
     </div>
-    {ct?<h1>You are all caught up for the notifications!</h1>:null}
+    {ct?<h1 id='cp'>You are all caught up for the notifications!</h1>:null}
 {acc?   
          <h1 style={{color:'green'}}>Accepted the request!</h1>
 :null}  
@@ -142,3 +142,4 @@ async function adadd(){
 }
 
 export default Admin
+
