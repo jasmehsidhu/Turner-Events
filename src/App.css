@@ -115,7 +115,6 @@ padding:40px;
 height:50px;
 width:50px;
 }
-#back
 #types{
   display: flex;
   gap:10px;
@@ -173,12 +172,6 @@ border:2px solid black
   height:30px;
   display: flex;
   gap:20px
- }
- #peek>button{
-   background-color: white;
-  border-radius:5px;
-  color:#0a1c4dff;
-  width:100px;
  }
 #marn{
   color:green;
@@ -287,6 +280,24 @@ transition:background-color 0.4s ease
  #fullview>p{
  font-size: 14px;
   }
+ #peek>button{
+   background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:100px;
+ }
+  #peek>#submit0{
+  border:none;
+  height:50px;
+  width:50px;
+  background-color:#0a1c4dff;
+  color:white;
+  font-size:30px;
+  position: fixed;
+  top:80%;
+  left:90%;
+  border-radius: 50%;
+}
 @keyframes rotate{
   from {
     transform:rotate(0deg)
@@ -383,7 +394,7 @@ width:30px
 #peek{
   position: absolute;
   top:3%;
-  left:47%;
+  left:67%;
   height:25px;
 
 }
@@ -402,6 +413,18 @@ width:50px
     height:80px;
     width:80px;
   }
+    #peek>#submit0{
+  border:none;
+  height:50px;
+  width:50px;
+  background-color:#0a1c4dff;
+  color:white;
+  font-size:30px;
+  position: fixed;
+  top:80%;
+  left:80%;
+  border-radius: 50%;
+}
   #heading{
     font-size:20px
   }
@@ -474,11 +497,23 @@ display: flex;
 padding: 20px;
 flex-direction: column;
 align-items: center;
-gap:0px
+gap:20px
 }
 #emg{
 height:70px;
 width:70px;
+}
+    #peek>#submit0{
+  border:none;
+  height:50px;
+  width:50px;
+  background-color:#0a1c4dff;
+  color:white;
+  font-size:30px;
+  position: fixed;
+  top:80%;
+  left:80%;
+  border-radius: 50%;
 }
 #events{
 gap:10px;}
@@ -515,7 +550,8 @@ width:30px
   background-color: white;
   border-radius:5px;
   color:#0a1c4dff;
-  width:90px;
+  width:100px;
+  gap:20px
 }
 #et{
 height:70px;
@@ -524,6 +560,13 @@ width:50px
 #atitle,#ldiss{
   width:300px
 }
+ #peek>button{
+   background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:100px;
+  height:25px
+ }
 #mainadmin{
   margin-top: 100px;
 }
