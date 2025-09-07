@@ -135,7 +135,7 @@ async function adadd(){
         <h1 onClick={()=>{setreason(false)}} style={{alignSelf:'end',color:'black',cursor:'pointer'}}>x</h1>
         <h2>Please provide the reason</h2>
         <textarea onChange={(e)=>{setreas(e.target.value)}} id='st' rows={2}></textarea>
-<button onClick={freject} style={{background:'crimson'}} id='reject'>Reject</button>    </div>:null}
+<button onClick={freject} id='rejectss'>Reject</button>    </div>:null}
 </section>
     </>
   )
