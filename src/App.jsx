@@ -1,313 +1,584 @@
-import { useState ,useEffect} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import academic from './assets/academic.png'
-import sports from './assets/sports.png'
-import guest from './assets/guest.png'
-import charity from './assets/charity.png'
-import cultural from './assets/cultural.png'
-import potluck from './assets/potluck.png'
-import club from './assets/club.png'
-import './App.css'
-import axios from 'axios'
-import Admin from './Admin'
+#header{
+  height:120px;
+  background-color: #0a1c4dff;
+  padding-left:20px;
+  display: flex;
+  align-items: center;
+}
+#emg{
+height:120px;
+width:120px;
+}
+.headings{
+  margin:0;
+  padding:0
+}
+#heading{
+   color:white;
+  font-size:40px
+}
+#searchs{
+padding:20px;
+display: flex;
+}
+#search{
+  flex:1;
+  height:40px;
+  border-radius:5px;
+  padding-left:15px
+}
+#title{
+       font-size: 35px;
+}
+#confirm{
+  height:150px;
+  width:300px;
+  border: 1px solid black;
+  border-radius:4px;
+  background-color: #fff;
+  position:absolute;
+  top:40%;
+  left:40%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding:10px;
+  justify-content: space-around;
+}
+#e{
+height:400px;
+width:200px;
+border:2px solid black;
+border-radius:5px;
+display: flex;
+padding: 20px;
+flex-direction: column;
+align-items: center;
+gap:30px
+}
+#events{
+padding:20px;
+display: flex;
+gap:40px;
+flex-wrap: wrap;
+}
+#date{
+    font-size: 18px;
+    margin-top: -30px;
+}
+#namea{
+}
+*{
+     font-family: "Afacad Flux", sans-serif;
+}
+#back{
+  margin-left:20px;
+  margin-top:20px;
+  height:30px;
+  width:60px;
+  border-radius: 5px;
+  color:white;
+  background-color: #0a1c4dff;
+  transition:background-color 0.4s ease
+}
+#back:hover{
+  border: 1px solid #0a1c4dff;
+  color: #0a1c4dff;
+  background: none;
+}
 
-function App() {
-useEffect(()=>{
- async function fetchData(){
-  showload(true)
-    var request=await axios.get('https://event-app-4-pm9h.onrender.com/')
-    console.log(request.data)
-     var objects1= request.data.map((ele,ind)=>{
-          switch(ele.etype){
-            case 'sports':
-              return({name:ele.name,sdis:ele.sdis,image:sports,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-            case 'guest':
-              return({name:ele.name,sdis:ele.sdis,image:guest,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-            case 'charity':
-              return({name:ele.name,sdis:ele.sdis,image:charity,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-            case 'club':
-              return({name:ele.name,sdis:ele.sdis,image:club,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-            case 'cultural':
-              return({name:ele.name,sdis:ele.sdis,image:cultural,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-            case 'potluck':
-              return({name:ele.name,sdis:ele.sdis,image:potluck,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-            case 'academic':
-              return({name:ele.name,sdis:ele.sdis,image:academic,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
-              break;
-          }
-        })
-        showload(false)
-         setallevents(objects1)
-        setevents(objects1)
+#mainadmin{
+  display: flex;
+  align-items: center;
+  margin-top:0px;
+  flex-direction: column;
+  gap:20px;
+  margin-top: -30px;
+  margin-bottom:20px;
+}
+#fullview{
+  display:flex;
+  flex-direction: column;
+height:500px;
+position: absolute;
+top:7%;
+left:35%;
+align-items: center;
+background-color: #fff;
+width:350px;
+border:2px solid black;
+border-radius:5px;
+gap:10px;
+padding:40px;
+}
+#etm{
+height:50px;
+width:50px;
+}
+#types{
+  display: flex;
+  gap:10px;
+  flex-wrap: wrap;
+}
+#et{
+  gap:0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:5px;
+height:100px;
+width:70px;
+border-radius:5px;
+border:2px solid black
+}
+#count{
+  margin-right:20%;
+  margin-top: -10px;
+}
+#atitle{
+   height:30px;
+  width:350px;
+  padding-left:8px;
+  background-color: #f2f2f2;
+  border-radius:5px;
+}
+#ftitle{
+  margin-bottom: 10px;
   }
-  fetchData()
-},[])
-
-var [allevents,setallevents]=useState([])
-var [border,setborder]=useState('academic')
-var [aadd,setaadd]=useState(true)
-var [cap,setcap]=useState()
-var [t,sett]=useState('Submit a request')
-var [events,setevents]=useState([])
-var [face,setface]=useState('main')
-var [warn,setwarn]=useState(false)
-var [username,setusername]=useState()
-var [password,setpassword]=useState()
-var [value,setvalue]=useState('')
-var [value2,setvalue2]=useState('')
-var[count,setcount]=useState(0)
-var[count2,setcount2]=useState(0)
-var[count3,setcount3]=useState(0)
-var [date, setdate]=useState()
-var [name, setname]=useState()
-var [location, setlocation]=useState()
-var [marn, setmarn]=useState(false)
-var [load,showload]=useState(false)
-var [full,showfull]=useState(false)
-var [loc, setloc]=useState()
-var [contact, setcontact]=useState()
-var [para,setpara]=useState()
-var [names,setnames]=useState()
-var [img,setimg]=useState()
-var [del,showdel]=useState(false)
-var [edit,showedit]=useState(false)
-var [key,setkey]=useState()
-var [requests,setrequests]=useState()
-var [confirm,setconfirm]=useState(false)
-var [fc,setfc]=useState(false)
-var [alls,setalls]=useState(false)
-var [em,setem]=useState(false)
-
-
-function change(){
-var x=document.getElementById('search').value
-if(x==''){
-setevents(allevents)
+#warn{
+  color:red;
+    
 }
-else{
-  var newarr=allevents.filter((ele,index)=>{
-  if(ele.name.toLowerCase().includes(x.toLowerCase())){
-    return ele;
+.loading{
+  position: fixed;
+  height:100px;
+  width:100px;
+  border:8px solid black;
+  border-radius:50%;
+  border-top-color:red;
+  animation:rotate 1s linear infinite;
+  left:46%;
+  top:35%;
+}
+#types{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+}
+#peek{
+  position: absolute;
+  top:7%;
+  left:82%;
+  height:30px;
+  display: flex;
+  gap:20px
+ }
+#marn{
+  color:green;
+    
+}
+#dis{
+  margin-top:-20px
+}
+#submit{
+  height:30px;
+  width:300px;
+  background-color: #0a1c4dff;
+  color:white;
+  border-radius:5px
+}
+#ldiss{
+  width:350px;
+  border-radius: 5px;
+  padding:5px;
+  background-color: #f2f2f2;
+}
+#username,#password{
+  height:30px;
+  width:300px;
+  padding-left:8px;
+  background-color: #f2f2f2;
+  border-radius:5px;
   }
-})
-console.log(newarr)
-setevents(newarr)
+#form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+  gap:20px
 }
+#setb{
+  display:flex;
+  justify-content: end;
+  padding:30px;
+  gap:20px
 }
-async function submit(){
-console.log(password)
-var request=await axios.post('https://event-app-4-pm9h.onrender.com/submit',{username:username,password:password.trim()})
-console.log([]==false)
-if(request.data=='done'){
-  setwarn(true)
-  console.log("hhe")
+#setb>button{
+  height:30px;
+  width:100px;
+  color:white;
+  border-radius: 5px;
+  border:none;
 }
-else{
-setrequests(request.data)
-setface('admin')
-setwarn(false)
+#deletes,#edits{
+transition:background-color 0.4s ease
 }
+#deletes:hover{
+  border:1px solid crimson;
+  color:crimson;
+    background: none;
+  
 }
-function dischange(e){
-if(e.target.value.length<101){
-setvalue(e.target.value)
-setcount(e.target.value.length)
+#deletes{
+  background-color: crimson;
 }
+#edits{
+    background-color: #0a1c4dff;
 }
-function dischange3(e){
-if(e.target.value.length<16){
-setname(e.target.value)
-setcount3(e.target.value.length)
+#edits:hover{
+  border:1px solid #0a1c4dff;
+  color:#0a1c4dff;
+    background: none;
 }
+#edit{
+  background-color: #0a1c4dff;
 }
-function dischange2(e){
-if(e.target.value.length<501){
-setvalue2(e.target.value)
-setcount2(e.target.value.length)
+#delete{
+background-color: crimson;
+transition:background-color 0.4s ease
 }
+#deleted{
+background-color: crimson;
+transition:background-color 0.4s ease
 }
-async function addevent(){
-
-   if(location==''||location==undefined||date==''||date==undefined||value==''||value==undefined||value2==''||value2==undefined||name==''||name==undefined||contact==''||contact==undefined){
-setalls(true)
-setem(false)
-setmarn(false)
+#delete:hover{
+  background:none;
+  border:1px solid crimson;
+  color:crimson
+}
+#deletes,#edits{
+  height:30px;
+  width:100px;
+  border:none;
+  color:white;
+  border-radius:5px;
+}
+#submit3{
+  height:30px;
+  background-color: #0a1c4dff;
+  border-radius:5px;
+  color:white;
+  width:100px;
+  margin-top: -10px;
+  transition: background-color 0.4s ease;
+}
+#submit3:hover{
+  border: 1px solid #0a1c4dff;
+  color: #0a1c4dff;
+  background: none;
+}
+ #fullview>p{
+ font-size: 14px;
+  }
+ #peek>button{
+   background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:100px;
  }
- else if(contact.slice(-9)!='@pdsb.net'){
-setem(true)
-setmarn(false)
-setalls(false)
- }
- else{
-  showload(true)
-   var request=await axios.post('https://event-app-4-pm9h.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
-   if(request.data=='done'){
-    showload(false)
-    setmarn(true)
-    setalls(false)
-    setem(false)
-    setTimeout(()=>{
-      setmarn(false)
-    },2000)
-   }
- }
-
+  #peek>#submit0{
+  border:none;
+  height:50px;
+  width:50px;
+  background-color:#0a1c4dff;
+  color:white;
+  font-size:30px;
+  position: fixed;
+  top:80%;
+  left:90%;
+  border-radius: 50%;
 }
-function back(){
-  setface('main')
-  showload(false)
-  showdel(false)
-  showwarn(false)
-  setfc(false)
-  showalls(false)
-}
-
-function fullviews(e){
-showfull(true)
-var item=e.target.parentElement;
-setnames(item.children[1].innerText)
-setimg(item.children[0].getAttribute('src'))
-events.map((ele,index)=>{
- if(item.getAttribute('data-key')==ele.key){
-  setloc(ele.location)
-  setpara(ele.ldis)
- }
-})
-}
-function dels(e){
-var item=e.target.parentElement;
-setkey(item.getAttribute('data-key'))
-setconfirm(true)
-}
-function dele(e){
-setface('main')
-showdel(true)
-}
-async function fdelete(){
-  var request =await axios.post('https://event-app-4-pm9h.onrender.com/delete',{key:key})
-  if(request.data=='done'){
-    setfc(true)
+@keyframes rotate{
+  from {
+    transform:rotate(0deg)
+  }
+  to {
+    transform:rotate(360deg)
   }
 }
-  return (
-    <>
-    <div id='header'>
-      <h1 id='heading'>Turner Fenton Events</h1>
-    </div>
-    <div id='loader'>
-      {load?<div className='loading'></div> :null}
-    </div>
-{face!='main'?    <button onClick={back} id='back'>Back</button>:null}  
-  {face=='main'?<><div id='searchs'>
-      <input onChange={change} placeholder='Search events' type='text' id='search'></input>
-    </div>
-    <div id='main'>
-<div id='events'>
-  {events.map((ele,index)=>{
-return(
-  <div data-key={ele.key} id='e'>
-{ del?   <button onClick={dels} id='deleted' style={{border:'none',borderRadius:'2px',color:'white',alignSelf:'end'}}>Delete</button>:null}
-{edit?<button id='edit' style={{border:'none',borderRadius:'2px',color:'white',alignSelf:'end'}}>Edit</button>:null}
-    <img id='emg' src={ele.image}></img>
-    <h1 id='title'>{ele.name}</h1>
-    <h2 id='date'>📅 {ele.date.slice(4)}</h2>
-    <p id='dis'>{ele.sdis}</p>
-    <button onClick={(fullviews)} id='submit3'>View details</button>
-  </div>
-)
-  })}
-</div>
-  <div id='peek'>
-      <button onClick={()=>{setface('auth')}}  id='submit2'>Admin Login</button>
-      <button onClick={()=>{setface('request')}}  id='submit0'>+</button>
-  </div>
-    </div></>:null}
-  {face=='auth'?<>
-<div id='forms'>
-    <div id='form'>
-      <h1 id='ftitle'>Admin Login</h1>
-      {warn?      <h3 id='warn'>username or password is incorrect</h3>
-:null}
-    <input onChange={(e)=>{setusername(e.target.value)}} placeholder='Username' id='username' type='text'></input>
-    <input onChange={(e)=>{setpassword(e.target.value)}}placeholder='Password' id='password' type='password'></input>
-    <button onClick={submit} id='submit'>Login</button>
-  </div>
-</div>
-  </>:null}
-  {face=='request'?
-  <>  
-  <div id='mainadmin'>
-          <h1 id='ftitle'>{t}</h1>
-{marn?<h3  id='marn'>Request submited succesfully</h3>
-:null}    
-{alls?<h3  id='marn' style={{color:'red'}}>Please fill all the fields</h3>:null}
-{em?<h3  id='marn' style={{color:'red'}}>Email not acceptable</h3>:null}
-    <input value={name} onChange={dischange3} placeholder='Title' type='text' id='atitle'></input>
-                            <p id='count'>{count3}/15</p>
-{aadd?<input onChange={(e)=>{setcontact(e.target.value)}} placeholder='School email' type='email' id='atitle'></input>
-:null}
-<input onChange={(e)=>{setlocation(e.target.value)}} placeholder='Location' type='text' id='atitle'></input>
-        <textarea id='ldiss' onChange={dischange} value={value} placeholder='Discription...' rows={2}></textarea>
-                        <p id='count'>{count}/100</p>
-                <textarea id='ldiss' onChange={dischange2} value={value2} placeholder='Long Discription...' rows={5}></textarea>
-                <p id='count'>{count2}/500</p>
-                <input onChange={(e)=>{setdate(new Date(e.target.value))}} placeholder='Title' type='date' id='atitle'></input>
-        <div id='types'>
-          <div onClick={()=>{setborder('academic')}} style={border=='academic'?{borderColor:'red'}:null} id='et'>
-            <img  id='etm'src={academic}></img>
-            <h4 id='namea'>Academic</h4>
-          </div>
-           <div onClick={()=>{setborder('charity')}} style={border=='charity'?{borderColor:'red'}:null} id='et'>
-            <img id='etm'src={charity}></img>
-            <h4 id='namea'>Charity</h4>
-          </div> <div onClick={()=>{setborder('guest')}} style={border=='guest'?{borderColor:'red'}:null} id='et'>
-            <img id='etm'src={guest}></img>
-            <h4 id='namea'>Guest</h4>
-          </div> <div onClick={()=>{setborder('sports')}} style={border=='sports'?{borderColor:'red'}:null} id='et'>
-            <img id='etm'src={sports}></img>
-            <h4 id='namea'>Sports</h4>
-          </div> <div onClick={()=>{setborder('potluck')}} style={border=='potluck'?{borderColor:'red'}:null} id='et'>
-            <img id='etm'src={potluck}></img>
-            <h4 id='namea'>Potluck</h4>
-          </div> <div onClick={()=>{setborder('cultural')}} style={border=='cultural'?{borderColor:'red'}:null} id='et'>
-            <img id='etm'src={cultural}></img>
-            <h4 id='namea'>Cultural</h4>
-          </div> <div onClick={()=>{setborder('club')}} style={border=='club'?{borderColor:'red'}:null} id='et'>
-            <img id='etm'src={club}></img>
-            <h4 id='namea'>Club</h4>
-          </div>
-        </div>
-            <button onClick={addevent} id='submit'>Add event</button>
-
-  </div></>:null}
-{full?  <div id='fullview'>
-  <h1 onClick={()=>{showfull(false)}} style={{marginTop:'-30px',alignSelf:'end',cursor:'pointer'}}>X</h1>
-    <img id='fimage' src={img}></img>
-    <h1 className='headings'>{names}</h1>
-        <h2 className='headings'>📍{loc}</h2>
-        <p style={{marginTop:'10px'}} id='dis'>{para}
-</p>
-  </div>:null}
-{confirm?  <div id='confirm'>
-    <h1 style={{margin:0}}>Are you sure?</h1>
-{
-  fc?    <h4 style={{margin:0}} id='warn'>Deletion succesfully</h4>
-:null
-}    <div  id='btns' style={{display:'flex',gap:'10px'}}><button onClick={fdelete}  id='deletes' >Delete</button>
-    <button onClick={()=>{setconfirm(false);}}  id='edits'>Cancel</button>
-    </div>
-  </div>:null}
-{face=='admin'?<Admin setface={setface} t={sett} showdel={showdel} load={showload} requests={requests} cap={setcap} aadd={setaadd}></Admin>:null}
-    </>
-  )
+@media (max-width:601px) and (min-width:401px){
+  #submit3{
+    width:80px;
+    margin-top:0;
+    height:30px
+  }
+  #fimage{
+    height:100px;
+    width:100px
+  }
+  #confirm{
+    height:100px;
+    width:200px;
+    left:27%
+  }
+  #setb{
+    justify-content: center;
+  }
+  #deletes,#edits{
+    height:20px;
+    width:80px
+  }
+  #confirm>h1{
+    font-size:25px
+  }
+  #fullview{
+  display:flex;
+  flex-direction: column;
+height:500px;
+position: absolute;
+top:14%;
+left:15%;
+align-items: center;
+background-color: #fff;
+width:200px;
+border:2px solid black;
+border-radius:5px;
+gap:10px;
+padding:40px;
+  }
+  #fullview>p{
+ font-size: 13px;
+  }
+  #e{
+height:330px;
+width:120px;
+border:2px solid black;
+border-radius:5px;
+display: flex;
+padding: 20px;
+flex-direction: column;
+align-items: center;
+gap:23px
 }
+#emg{
+height:70px;
+width:70px;
+}
+#events{
+gap:40px;}
+#title{
+  font-size: 20px;
+}
+#date{
+  font-size: 13px;
+      margin-top: -15px;
 
-export default App
+}
+#types{
+  padding:20px
+}
+p{
+  font-size: 12px;
+}
+#etm{
+height: 30px;
+width:30px
+}
+#count{
+  margin-right: 65%;
+}
+  #dis{
+    margin-top:-7px
+  }
+    
+#peek{
+  position: absolute;
+  top:3%;
+  left:67%;
+  height:25px;
 
+}
+#et{
+height:70px;
+width:50px
+}
+#atitle,#ldiss{
+  width:300px
+}
+#mainadmin{
+  margin-top: 100px;
+}
+  .loading{
+    left:37%;
+    height:80px;
+    width:80px;
+  }
+    #peek>#submit0{
+  border:none;
+  height:50px;
+  width:50px;
+  background-color:#0a1c4dff;
+  color:white;
+  font-size:30px;
+  position: fixed;
+  top:80%;
+  left:80%;
+  border-radius: 50%;
+}
+  #heading{
+    font-size:20px
+  }
+  #header{
+    height:80px;
+  }
+ #peek>button{
+   background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:100px;
+  height:25px
+ }
+}
+@media (max-width:400px){
+  #heading{
+    font-size:30px
+  }
+  #peek{
+    left:60%
+  }
+ #submit3{
+    width:80px;
+    margin-top:0;
+    height:30px
+  }
+  #fimage{
+    height:100px;
+    width:100px
+  }
+  #confirm{
+    height:100px;
+    width:200px;
+    left:27%
+  }
+  #setb{
+    justify-content: center;
+  }
+  #deletes,#edits{
+    height:20px;
+    width:80px
+  }
+  #confirm>h1{
+    font-size:25px
+  }
+  #fullview{
+  display:flex;
+  flex-direction: column;
+height:500px;
+position: absolute;
+top:14%;
+left:15%;
+align-items: center;
+background-color: #fff;
+width:200px;
+border:2px solid black;
+border-radius:5px;
+gap:10px;
+padding:40px;
+  }
+  #fullview>p{
+ font-size: 13px;
+  }
+  #e{
+height:330px;
+width:110px;
+border:2px solid black;
+border-radius:5px;
+display: flex;
+padding: 20px;
+flex-direction: column;
+align-items: center;
+gap:20px
+}
+#emg{
+height:70px;
+width:70px;
+}
+    #peek>#submit0{
+  border:none;
+  height:50px;
+  width:50px;
+  background-color:#0a1c4dff;
+  color:white;
+  font-size:30px;
+  position: fixed;
+  top:80%;
+  left:80%;
+  border-radius: 50%;
+}
+#events{
+gap:10px;}
+#title{
+  font-size: 20px;
+}
+#date{
+  font-size: 13px;
+      margin-top: -15px;
+
+}
+#types{
+  padding:20px
+}
+p{
+  font-size: 12px;
+}
+#etm{
+height: 30px;
+width:30px
+}
+#count{
+  margin-right: 72%;
+}
+  #dis{
+    margin-top:-7px
+  }
+    
+#peek{
+  position: absolute;
+  top:3%;
+  left:65%;
+  height:25px;
+  background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:100px;
+  gap:20px
+}
+#et{
+height:70px;
+width:50px
+}
+#atitle,#ldiss{
+  width:300px
+}
+ #peek>button{
+   background-color: white;
+  border-radius:5px;
+  color:#0a1c4dff;
+  width:100px;
+  height:25px
+ }
+#mainadmin{
+  margin-top: 100px;
+}
+  .loading{
+    left:37%;
+    height:80px;
+    width:80px;
+  }
+  #heading{
+    font-size:20px
+  }
+  #header{
+    height:80px;
+  }
+}
