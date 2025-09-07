@@ -411,6 +411,9 @@ width:50px
   #date,#dis{
   margin-top:-23px
 }
+  #submit3{
+  margin-top:-15px
+}
 }
 @media (max-width:400px){
   #heading{
