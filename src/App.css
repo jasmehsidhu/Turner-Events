@@ -408,6 +408,9 @@ width:50px
   #header{
     height:80px;
   }
+  #date,#dis{
+  margin-top:-18px
+}
 }
 @media (max-width:400px){
   #heading{
