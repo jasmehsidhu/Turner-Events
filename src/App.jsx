@@ -226,7 +226,7 @@ return(
 </div>
   <div id='peek'>
       <button onClick={()=>{setface('auth')}}  id='submit2'>Admin Login</button>
-      <button onClick={()=>{setface('request')}}  id='submit2'>Request</button>
+      <button onClick={()=>{setface('request')}}  id='submit0'>+</button>
   </div>
     </div></>:null}
   {face=='auth'?<>
@@ -251,12 +251,12 @@ return(
 {em?<h3  id='marn' style={{color:'red'}}>Email not acceptable</h3>:null}
     <input value={name} onChange={dischange3} placeholder='Title' type='text' id='atitle'></input>
                             <p id='count'>{count3}/15</p>
-{aadd?<input onChange={(e)=>{setcontact(e.target.value)}} placeholder='Contact email' type='email' id='atitle'></input>
+{aadd?<input onChange={(e)=>{setcontact(e.target.value)}} placeholder='School email' type='email' id='atitle'></input>
 :null}
 <input onChange={(e)=>{setlocation(e.target.value)}} placeholder='Location' type='text' id='atitle'></input>
         <textarea id='ldiss' onChange={dischange} value={value} placeholder='Discription...' rows={2}></textarea>
                         <p id='count'>{count}/100</p>
-                <textarea id='ldiss' onChange={dischange2} value={value2} placeholder='Discription...' rows={5}></textarea>
+                <textarea id='ldiss' onChange={dischange2} value={value2} placeholder='Long Discription...' rows={5}></textarea>
                 <p id='count'>{count2}/500</p>
                 <input onChange={(e)=>{setdate(new Date(e.target.value))}} placeholder='Title' type='date' id='atitle'></input>
         <div id='types'>
@@ -310,3 +310,4 @@ return(
 }
 
 export default App
+
