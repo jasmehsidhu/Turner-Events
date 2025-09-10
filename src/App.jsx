@@ -102,18 +102,17 @@ setevents(newarr)
 }
 }
 async function submit(){
-console.log(password)
+showload(true)
 var request=await axios.post('https://event-app-4-pm9h.onrender.com/submit',{username:username,password:password.trim()})
-console.log([]==false)
 if(request.data=='done'){
   setwarn(true)
-  console.log("hhe")
 }
 else{
 setrequests(request.data)
 setface('admin')
 setwarn(false)
 }
+showload(false)
 }
 function dischange(e){
 if(e.target.value.length<101){
@@ -135,7 +134,7 @@ setcount2(e.target.value.length)
 }
 async function addevent(){
 
-   if(location==''||location==undefined||date==''||date==undefined||value==''||value==undefined||value2==''||value2==undefined||name==''||name==undefined||contact==''||contact==undefined){
+     if(location==''||location==undefined||date==''||date==undefined||value==''||value==undefined||value2==''||value2==undefined||name==''||name==undefined||contact==''||contact==undefined){
 setalls(true)
 setem(false)
 setmarn(false)
@@ -149,6 +148,8 @@ setalls(false)
   showload(true)
    var request=await axios.post('https://event-app-4-pm9h.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
    if(request.data=='done'){
+    setlocation('')
+    setdate('')
     showload(false)
     setmarn(true)
     setalls(false)
@@ -158,7 +159,6 @@ setalls(false)
     },2000)
    }
  }
-
 }
 function back(){
   setface('main')
@@ -225,8 +225,10 @@ return(
   })}
 </div>
   <div id='peek'>
-      <button onClick={()=>{setface('auth')}}  id='submit2'>Admin Login</button>
-      <button onClick={()=>{setface('request')}}  id='submit0'>+</button>
+      <button onClick={()=>{setface('auth');showload(false);setwarn(false)}}  id='submit2'>Admin Login</button>
+      <button onClick={()=>{setface('request');showload(false);setalls(false)
+    setem(false);setmarn(false)
+}}  id='submit0'>+</button>
   </div>
     </div></>:null}
   {face=='auth'?<>
@@ -310,3 +312,4 @@ return(
 }
 
 export default App
+
