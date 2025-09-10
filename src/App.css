@@ -264,7 +264,7 @@ transition:background-color 0.4s ease
   border-radius:5px;
 }
 #submit3{
-  height:30px;
+  height:35px;
   background-color: #0a1c4dff;
   border-radius:5px;
   color:white;
@@ -489,7 +489,7 @@ padding:40px;
  font-size: 13px;
   }
   #e{
-height:330px;
+ height:290px;
 width:110px;
 border:2px solid black;
 border-radius:5px;
