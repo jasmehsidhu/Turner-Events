@@ -112,7 +112,6 @@ async function adadd(){
 <section id='console'>
     <div style={{alignSelf:'end'}} id='setb'>
             <button onClick={dele} id='delete'>Delete Events</button>
-
     </div>
     {ct?<h1 id='cp'>You are all caught up for the notifications!</h1>:null}
 {acc?   
@@ -142,4 +141,3 @@ async function adadd(){
 }
 
 export default Admin
-
