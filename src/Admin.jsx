@@ -57,13 +57,16 @@ load()
       })
       var Object={id:key,name:name,location:location,sdis:sdis,ldis:ldis,date:date,etype:etype,contact:contact}
       load(true)
-      var data=await axios.post('https://event-app-4-pm9h.onrender.com/main',Object)
+      var data=await axios.post('http://10.0.0.65:2000/main',Object)
       if(data.data=='done'){
         var newarr=request.filter((ele,index)=>{
     if(ele.id!=Object.id){
         return ele
     }
 })
+if(newarr.length==0){
+    setct(true)
+}
 load(false)
 setrequest(newarr)
       showacc(true)
@@ -74,7 +77,6 @@ setrequest(newarr)
   }
   async function reject(e){
 setreason(true)
-var email;
 var parent=e.target.parentElement.parentElement;
 var key=parent.getAttribute('data-key')
 setkey(key)
@@ -91,12 +93,15 @@ showdel(true)
 }
   async function freject(e){
 load(true)
-var data=await axios.post('https://event-app-4-pm9h.onrender.com/reject',{reason:reas,contact:contacts,key:key})
+var data=await axios.post('https://event-app-3-fb1n.onrender.com/reject',{reason:reas,contact:contacts,key:key})
  var newarr=request.filter((ele,index)=>{
     if(ele.id!=key){
         return ele
     }
 })
+if(newarr.length==0){
+    setct(true)
+}
 load(false)
 setrequest(newarr)
 setreason(false)
@@ -110,7 +115,8 @@ async function adadd(){
   return (
     <>
 <section id='console'>
-    <div style={{alignSelf:'end'}} id='setb'>
+    <div id='setb'>
+                                <button onClick={adadd} id='deletem'>Add Events</button>
             <button onClick={dele} id='delete'>Delete Events</button>
     </div>
     {ct?<h1 id='cp'>You are all caught up for the notifications!</h1>:null}
