@@ -16,7 +16,7 @@ function App() {
 useEffect(()=>{
  async function fetchData(){
   showload(true)
-    var request=await axios.get('https://event-app-4-pm9h.onrender.com/')
+    var request=await axios.get('https://event-app-3-fb1n.onrender.com/')
     console.log(request.data)
      var objects1= request.data.map((ele,ind)=>{
           switch(ele.etype){
@@ -43,6 +43,7 @@ useEffect(()=>{
               break;
           }
         })
+        console.log(objects1)
         showload(false)
          setallevents(objects1)
         setevents(objects1)
@@ -53,7 +54,7 @@ useEffect(()=>{
 var [allevents,setallevents]=useState([])
 var [border,setborder]=useState('academic')
 var [aadd,setaadd]=useState(true)
-var [cap,setcap]=useState()
+var [cap,setcap]=useState(false)
 var [t,sett]=useState('Submit a request')
 var [events,setevents]=useState([])
 var [face,setface]=useState('main')
@@ -61,6 +62,7 @@ var [warn,setwarn]=useState(false)
 var [username,setusername]=useState()
 var [password,setpassword]=useState()
 var [value,setvalue]=useState('')
+var [sname,setsname]=useState('Request submitted succesfully')
 var [value2,setvalue2]=useState('')
 var[count,setcount]=useState(0)
 var[count2,setcount2]=useState(0)
@@ -102,15 +104,16 @@ setevents(newarr)
 }
 }
 async function session(){
-  setface('admin')
-var request=await axios.post('https://event-app-4-pm9h.onrender.com/submit',{username:'peelschools.org',password:'Helloturner'})
+  showload(true)
+var request=await axios.post('https://event-app-3-fb1n.onrender.com/submit',{username:'peelschools.org',password:'Helloturner'})
 if(request.data=='done'){
-  setwarn(true)
 }
 else{
+console.log('ok')
 setrequests(request.data)
 setface('admin')
 setwarn(false)
+showload(false)
 }
 }
 function changes(){
@@ -124,7 +127,7 @@ function changes(){
 }
 async function submit(){
 showload(true)
-var request=await axios.post('https://event-app-4-pm9h.onrender.com/submit',{username:username,password:password.trim()})
+var request=await axios.post('https://event-app-3-fb1n.onrender.com/submit',{username:username,password:password.trim()})
 if(request.data=='done'){
   setwarn(true)
 }
@@ -155,8 +158,32 @@ setcount2(e.target.value.length)
 }
 }
 async function addevent(){
-
-     if(location==''||location==undefined||date==''||date==undefined||value==''||value==undefined||value2==''||value2==undefined||name==''||name==undefined||contact==''||contact==undefined){
+if(cap){
+    if(location==''||location==undefined||date==''||date==undefined||value==''||value==undefined||value2==''||value2==undefined||name==''||name==undefined){
+setalls(true)
+setem(false)
+setmarn(false)
+ }
+ else{
+    showload(true)
+     var r1=await axios.post('https://event-app-3-fb1n.onrender.com/admin',{name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
+     if(r1.data=='done'){
+        setlocation('')
+        setsname('Added the event!')
+    setdate('')
+    showload(false)
+    setmarn(true)
+    setalls(false)
+    setcap(false)
+    setem(false)
+    setTimeout(()=>{
+      setmarn(false)
+    },2000)
+     }
+ }
+}
+else{
+    if(location==''||location==undefined||date==''||date==undefined||value==''||value==undefined||value2==''||value2==undefined||name==''||name==undefined||contact==''||contact==undefined){
 setalls(true)
 setem(false)
 setmarn(false)
@@ -168,7 +195,7 @@ setalls(false)
  }
  else{
   showload(true)
-   var request=await axios.post('https://event-app-4-pm9h.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
+   var request=await axios.post('https://event-app-3-fb1n.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
    if(request.data=='done'){
     setlocation('')
     setdate('')
@@ -181,6 +208,7 @@ setalls(false)
     },2000)
    }
  }
+}
 }
 function back(){
   setface('main')
@@ -213,9 +241,14 @@ setface('main')
 showdel(true)
 }
 async function fdelete(){
-  var request =await axios.post('https://event-app-4-pm9h.onrender.com/delete',{key:key})
+  showload(true)
+  var request =await axios.post('https://event-app-3-fb1n.onrender.com/delete',{key:key})
   if(request.data=='done'){
     setfc(true)
+    showload(false)
+    setTimeout(()=>{
+      setfc(false)
+    },2000)
   }
 }
   return (
@@ -269,7 +302,7 @@ return(
   <>  
   <div id='mainadmin'>
           <h1 id='ftitle'>{t}</h1>
-{marn?<h3  id='marn'>Request submited succesfully</h3>
+{marn?<h3  id='marn'>{sname}</h3>
 :null}    
 {alls?<h3  id='marn' style={{color:'red'}}>Please fill all the fields</h3>:null}
 {em?<h3  id='marn' style={{color:'red'}}>Email not acceptable</h3>:null}
@@ -325,7 +358,7 @@ return(
   fc?    <h4 style={{margin:0}} id='warn'>Deletion succesfully</h4>
 :null
 }    <div  id='btns' style={{display:'flex',gap:'10px'}}><button onClick={fdelete}  id='deletes' >Delete</button>
-    <button onClick={()=>{setconfirm(false);}}  id='edits'>Cancel</button>
+    <button onClick={()=>{setconfirm(false); showdel(false)}}  id='edits'>Cancel</button>
     </div>
   </div>:null}
 {face=='admin'?<Admin setface={setface} t={sett} showdel={showdel} load={showload} requests={requests} cap={setcap} aadd={setaadd}></Admin>:null}
@@ -334,3 +367,4 @@ return(
 }
 
 export default App
+
