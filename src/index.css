@@ -3,6 +3,9 @@
     padding:0;
       font-family: "Afacad Flux", sans-serif;
 }
+#setb{
+    align-self: end;
+}
 #reject,#accept{
 height:30px;
 width:70px;
@@ -78,6 +81,19 @@ color:#0a1c4dff
 #reason>textarea{
     width:250px
 }
+#deletem{
+    height:30px;
+    width:100px;
+    color:#fff;
+    background-color: #0a1c4dff;
+    border-radius:5px;
+    transition: background 0.4s ease;
+}
+#deletem:hover{
+background: none;
+border:1px solid #0a1c4dff;
+color:#0a1c4dff
+}
 #req{
     padding:20px;
     gap:15px;
@@ -97,6 +113,9 @@ section{
 @media (max-width:601px){
     #req{
       width:300px;
+    }
+    #setb{
+        align-self: center;
     }
     #sdis,#ldis{
         font-size:15px
