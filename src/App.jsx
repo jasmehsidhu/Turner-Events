@@ -101,6 +101,27 @@ console.log(newarr)
 setevents(newarr)
 }
 }
+async function session(){
+  setface('admin')
+var request=await axios.post('https://event-app-4-pm9h.onrender.com/submit',{username:'peelschools.org',password:'Helloturner'})
+if(request.data=='done'){
+  setwarn(true)
+}
+else{
+setrequests(request.data)
+setface('admin')
+setwarn(false)
+}
+}
+function changes(){
+  var m=localStorage.getItem('session')
+  if(m!='true'){
+    setface('auth')
+  }
+  else{
+    session()
+  }
+}
 async function submit(){
 showload(true)
 var request=await axios.post('https://event-app-4-pm9h.onrender.com/submit',{username:username,password:password.trim()})
@@ -108,6 +129,7 @@ if(request.data=='done'){
   setwarn(true)
 }
 else{
+localStorage.setItem('session','true')
 setrequests(request.data)
 setface('admin')
 setwarn(false)
@@ -225,7 +247,7 @@ return(
   })}
 </div>
   <div id='peek'>
-      <button onClick={()=>{setface('auth');showload(false);setwarn(false)}}  id='submit2'>Admin Login</button>
+      <button onClick={changes}  id='submit2'>Admin Login</button>
       <button onClick={()=>{setface('request');showload(false);setalls(false)
     setem(false);setmarn(false)
 }}  id='submit0'>+</button>
@@ -312,4 +334,3 @@ return(
 }
 
 export default App
-
