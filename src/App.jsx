@@ -45,12 +45,14 @@ useEffect(()=>{
         })
         console.log(objects1)
         showload(false)
+        setfetch(true)
          setallevents(objects1)
         setevents(objects1)
   }
   fetchData()
 },[])
-
+var Cdate=new Date();
+var cdate=Cdate.toISOString().split('T')[0]
 var [allevents,setallevents]=useState([])
 var [border,setborder]=useState('academic')
 var [aadd,setaadd]=useState(true)
@@ -68,6 +70,7 @@ var[count,setcount]=useState(0)
 var[count2,setcount2]=useState(0)
 var[count3,setcount3]=useState(0)
 var [date, setdate]=useState()
+var [fetch, setfetch]=useState(false)
 var [name, setname]=useState()
 var [location, setlocation]=useState()
 var [marn, setmarn]=useState(false)
@@ -212,8 +215,13 @@ setalls(false)
 }
 function back(){
   setface('main')
+if(fetch){
   showload(false)
-  showdel(false)
+}  
+else{
+  showload(true)
+}
+showdel(false)
   showwarn(false)
   setfc(false)
   showalls(false)
@@ -315,7 +323,7 @@ return(
                         <p id='count'>{count}/100</p>
                 <textarea id='ldiss' onChange={dischange2} value={value2} placeholder='Discription...' rows={5}></textarea>
                 <p id='count'>{count2}/500</p>
-                <input onChange={(e)=>{setdate(new Date(e.target.value))}} placeholder='Title' type='date' id='atitle'></input>
+                <input min={cdate} onChange={(e)=>{setdate(new Date(e.target.value))}} placeholder='Title' type='date' id='atitle'></input>
         <div id='types'>
           <div onClick={()=>{setborder('academic')}} style={border=='academic'?{borderColor:'red'}:null} id='et'>
             <img  id='etm'src={academic}></img>
