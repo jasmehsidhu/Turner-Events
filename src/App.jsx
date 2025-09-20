@@ -204,7 +204,7 @@ setalls(true)
 setem(false)
 setmarn(false)
  }
- else if(contact.slice(-9)!='@pdsb.net'){
+ else if(contact.slice(-9)!='@pdsb.net'||contact.length<10){
 setem(true)
 setmarn(false)
 setalls(false)
@@ -263,12 +263,7 @@ async function fdelete(){
   showload(true)
   var request =await axios.post('https://event-app-3-fb1n.onrender.com/delete',{key:key})
   if(request.data=='done'){
-    setfc(true)
-    showload(false)
-    setTimeout(()=>{
-      setfc(false)
-      setconfirm(false)
-    },2000)
+    window.location.reload()
   }
 }
 function select(e){
