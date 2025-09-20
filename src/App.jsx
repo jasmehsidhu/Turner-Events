@@ -17,36 +17,48 @@ useEffect(()=>{
  async function fetchData(){
   showload(true)
     var request=await axios.get('https://event-app-3-fb1n.onrender.com/')
-    console.log(request.data)
-     var objects1= request.data.map((ele,ind)=>{
+    var m=request.data
+    for(var x=0;x<m.length;x++){
+         m.forEach((item,index)=>{
+            if(m[index+1]){
+                 if(m[index].date>m[index+1].date){
+                    var l=m[index]
+                    m[index]=m[index+1]
+                    m[index+1]=l
+             }
+            }
+         })
+    }
+    var objects1= request.data.map((ele,ind)=>{
           switch(ele.etype){
             case 'sports':
-              return({name:ele.name,sdis:ele.sdis,image:sports,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:sports,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
             case 'guest':
-              return({name:ele.name,sdis:ele.sdis,image:guest,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:guest,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
             case 'charity':
-              return({name:ele.name,sdis:ele.sdis,image:charity,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:charity,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
             case 'club':
-              return({name:ele.name,sdis:ele.sdis,image:club,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:club,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
             case 'cultural':
-              return({name:ele.name,sdis:ele.sdis,image:cultural,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:cultural,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
             case 'potluck':
-              return({name:ele.name,sdis:ele.sdis,image:potluck,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:potluck,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
             case 'academic':
-              return({name:ele.name,sdis:ele.sdis,image:academic,date:ele.date,ldis:ele.ldis,location:ele.location,key:ele.id})
+              return({name:ele.name,sdis:ele.sdis,image:academic,date:new Date(ele.date).toDateString(),ldis:ele.ldis,location:ele.location,key:ele.id})
               break;
           }
         })
         console.log(objects1)
         showload(false)
         setfetch(true)
-         setallevents(objects1)
+        setallevents(objects1)
+        setallfevents(objects1)
         setevents(objects1)
   }
   fetchData()
@@ -54,14 +66,15 @@ useEffect(()=>{
 var Cdate=new Date();
 var cdate=Cdate.toISOString().split('T')[0]
 var [allevents,setallevents]=useState([])
+var [allfevents,setallfevents]=useState([])
 var [border,setborder]=useState('academic')
 var [aadd,setaadd]=useState(true)
 var [cap,setcap]=useState(false)
 var [t,sett]=useState('Submit a request')
 var [events,setevents]=useState([])
-var [face,setface]=useState('main')
 var [warn,setwarn]=useState(false)
 var [username,setusername]=useState()
+  var [face,setface]=useState('main')
 var [password,setpassword]=useState()
 var [value,setvalue]=useState('')
 var [sname,setsname]=useState('Request submitted succesfully')
@@ -169,7 +182,7 @@ setmarn(false)
  }
  else{
     showload(true)
-     var r1=await axios.post('https://event-app-3-fb1n.onrender.com/admin',{name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
+     var r1=await axios.post('https://event-app-3-fb1n.onrender.com/admin',{name:name,sdis:value,ldis:value2,type:border,date:date.toISOString().split('T')[0],location:location})
      if(r1.data=='done'){
         setlocation('')
         setsname('Added the event!')
@@ -198,10 +211,8 @@ setalls(false)
  }
  else{
   showload(true)
-   var request=await axios.post('https://event-app-3-fb1n.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toDateString(),location:location})
+   var request=await axios.post('https://event-app-3-fb1n.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toISOString().split('T')[0],location:location})
    if(request.data=='done'){
-    setlocation('')
-    setdate('')
     showload(false)
     setmarn(true)
     setalls(false)
@@ -214,7 +225,7 @@ setalls(false)
 }
 }
 function back(){
-  setface('main')
+setface('main')
 if(fetch){
   showload(false)
 }  
@@ -256,9 +267,25 @@ async function fdelete(){
     showload(false)
     setTimeout(()=>{
       setfc(false)
+      setconfirm(false)
     },2000)
   }
 }
+function select(e){
+  var newarr=allfevents.filter((ele,index)=>{
+      if(e.target.value=='All'){
+        return true
+      }
+      else{
+         if(ele.date.includes(e.target.value.slice(0,3))&&ele.date.includes(e.target.value.slice(-4))){
+            return true;
+      }
+      }
+  })
+  setallevents(newarr)
+  setevents(newarr)
+}
+
   return (
     <>
     <div id='header'>
@@ -270,6 +297,13 @@ async function fdelete(){
 {face!='main'?    <button onClick={back} id='back'>Back</button>:null}  
   {face=='main'?<><div id='searchs'>
       <input onChange={change} placeholder='Search events' type='text' id='search'></input>
+      <select onChange={select} id='dropbox'>
+        <option>All</option>
+        <option value='Sep 2025'>Sep 2025</option>
+        <option value='Oct 2025'>Oct 2025</option>
+        <option value='Nov 2025'>Nov 2025</option>
+        <option value='Dec 2025'>Dec 2025</option>
+      </select>
     </div>
     <div id='main'>
 <div id='events'>
@@ -316,12 +350,12 @@ return(
 {em?<h3  id='marn' style={{color:'red'}}>Email not acceptable</h3>:null}
     <input value={name} onChange={dischange3} placeholder='Title' type='text' id='atitle'></input>
                             <p id='count'>{count3}/15</p>
-{aadd?<input onChange={(e)=>{setcontact(e.target.value)}} placeholder='PDSB email' type='email' id='atitle'></input>
+{aadd?<input onChange={(e)=>{setcontact(e.target.value)}} placeholder='Contact email' type='email' id='atitle'></input>
 :null}
 <input onChange={(e)=>{setlocation(e.target.value)}} placeholder='Location' type='text' id='atitle'></input>
-        <textarea id='ldiss' onChange={dischange} value={value} placeholder='Short discription...' rows={2}></textarea>
+        <textarea id='ldiss' onChange={dischange} value={value} placeholder='Discription...' rows={2}></textarea>
                         <p id='count'>{count}/100</p>
-                <textarea id='ldiss' onChange={dischange2} value={value2} placeholder='Long discription...' rows={5}></textarea>
+                <textarea id='ldiss' onChange={dischange2} value={value2} placeholder='Discription...' rows={5}></textarea>
                 <p id='count'>{count2}/500</p>
                 <input min={cdate} onChange={(e)=>{setdate(new Date(e.target.value))}} placeholder='Title' type='date' id='atitle'></input>
         <div id='types'>
@@ -375,4 +409,3 @@ return(
 }
 
 export default App
-
