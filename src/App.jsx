@@ -16,7 +16,7 @@ function App() {
 useEffect(()=>{
  async function fetchData(){
   showload(true)
-    var request=await axios.get('https://event-app-3-fb1n.onrender.com/')
+    var request=await axios.get('https://event-app-7.onrender.com/')
     var m=request.data
     for(var x=0;x<m.length;x++){
          m.forEach((item,index)=>{
@@ -106,10 +106,6 @@ var [em,setem]=useState(false)
 
 function change(){
 var x=document.getElementById('search').value
-if(x==''){
-setevents(allevents)
-}
-else{
   var newarr=allevents.filter((ele,index)=>{
   if(ele.name.toLowerCase().includes(x.toLowerCase())){
     return ele;
@@ -117,11 +113,11 @@ else{
 })
 console.log(newarr)
 setevents(newarr)
-}
+
 }
 async function session(){
   showload(true)
-var request=await axios.post('https://event-app-3-fb1n.onrender.com/submit',{username:'peelschools.org',password:'Helloturner'})
+var request=await axios.post('https://event-app-7.onrender.com/submit',{username:'peelschools.org',password:'Helloturner'})
 if(request.data=='done'){
 }
 else{
@@ -143,7 +139,7 @@ function changes(){
 }
 async function submit(){
 showload(true)
-var request=await axios.post('https://event-app-3-fb1n.onrender.com/submit',{username:username,password:password.trim()})
+var request=await axios.post('https://event-app-7.onrender.com/submit',{username:username,password:password.trim()})
 if(request.data=='done'){
   setwarn(true)
 }
@@ -182,7 +178,7 @@ setmarn(false)
  }
  else{
     showload(true)
-     var r1=await axios.post('https://event-app-3-fb1n.onrender.com/admin',{name:name,sdis:value,ldis:value2,type:border,date:date.toISOString().split('T')[0],location:location})
+     var r1=await axios.post('https://event-app-7.onrender.com/admin',{name:name,sdis:value,ldis:value2,type:border,date:date.toISOString().split('T')[0],location:location})
      if(r1.data=='done'){
         setlocation('')
         setsname('Added the event!')
@@ -211,7 +207,7 @@ setalls(false)
  }
  else{
   showload(true)
-   var request=await axios.post('https://event-app-3-fb1n.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toISOString().split('T')[0],location:location})
+   var request=await axios.post('https://event-app-7.onrender.com/',{contact:contact,name:name,sdis:value,ldis:value2,type:border,date:date.toISOString().split('T')[0],location:location})
    if(request.data=='done'){
     showload(false)
     setmarn(true)
@@ -261,7 +257,7 @@ showdel(true)
 }
 async function fdelete(){
   showload(true)
-  var request =await axios.post('https://event-app-3-fb1n.onrender.com/delete',{key:key})
+  var request =await axios.post('https://event-app-7.onrender.com/delete',{key:key})
   if(request.data=='done'){
     window.location.reload()
   }
