@@ -57,7 +57,7 @@ load()
       })
       var Object={id:key,name:name,location:location,sdis:sdis,ldis:ldis,date:date,etype:etype,contact:contact}
       load(true)
-      var data=await axios.post('https://event-app-3-fb1n.onrender.com/main',Object)
+      var data=await axios.post('https://event-app-7.onrender.com/main',Object)
       if(data.data=='done'){
         var newarr=request.filter((ele,index)=>{
     if(ele.id!=Object.id){
@@ -93,7 +93,7 @@ showdel(true)
 }
   async function freject(e){
 load(true)
-var data=await axios.post('https://event-app-3-fb1n.onrender.com/reject',{reason:reas,contact:contacts,key:key})
+var data=await axios.post('https://event-app-7.onrender.com/reject',{reason:reas,contact:contacts,key:key})
  var newarr=request.filter((ele,index)=>{
     if(ele.id!=key){
         return ele
