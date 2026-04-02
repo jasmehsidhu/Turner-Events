@@ -267,11 +267,14 @@ function select(e){
       if(e.target.value=='All'){
         return true
       }
-      else{
-         if(ele.date.includes(e.target.value.slice(0,3))&&ele.date.includes(e.target.value.slice(-4))){
-            return true;
-      }
-      }
+     else {
+  if (
+    ele.date.includes(e.target.value.slice(0, 3)) &&
+    ele.date.includes(e.target.value.slice(-4))
+  ) {
+    return true;
+  }
+}
   })
   setallevents(newarr)
   setevents(newarr)
@@ -290,10 +293,10 @@ function select(e){
       <input onChange={change} placeholder='Search events' type='text' id='search'></input>
       <select onChange={select} id='dropbox'>
         <option>All</option>
-        <option value='Sep 2025'>Apr 2026</option>
-        <option value='Oct 2025'>May 2026</option>
-        <option value='Nov 2025'>Jun 2026</option>
-        <option value='Dec 2025'>Jul 2026</option>
+        <option value='Sep 2025'>Sep 2025</option>
+        <option value='Oct 2025'>Oct 2025</option>
+        <option value='Nov 2025'>Nov 2025</option>
+        <option value='Dec 2025'>Dec 2025</option>
       </select>
     </div>
     <div id='main'>
