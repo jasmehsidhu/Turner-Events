@@ -117,7 +117,7 @@ setevents(newarr)
 }
 async function session(){
   showload(true)
-var request=await axios.post('https://event-app-8.onrender.com/submit',{username:'peelschools.org',password:'Helloturner'})
+var request=await axios.post('https://event-app-8.onrender.com/submit',{username:'jasmeh@pdsb.net',password:'Helloturner'})
 if(request.data=='done'){
 }
 else{
@@ -139,7 +139,7 @@ function changes(){
 }
 async function submit(){
 showload(true)
-var request=await axios.post('https://event-app-8.onrender.com/submit',{username:username,password:password.trim()})
+var request=await axios.post('http://10.0.0.65:2000/submit',{username:username,password:password.trim()})
 if(request.data=='done'){
   setwarn(true)
 }
@@ -400,4 +400,3 @@ return(
 }
 
 export default App
-
