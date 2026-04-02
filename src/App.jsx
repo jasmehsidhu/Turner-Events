@@ -229,7 +229,7 @@ else{
   showload(true)
 }
 showdel(false)
-  showwarn(false)
+  setwarn(false)
   setfc(false)
   showalls(false)
 }
