@@ -140,7 +140,7 @@ function changes(){
 async function submit(){
 showload(true)
 var request=await axios.post('https://event-app-8.onrender.com/submit',{username:username,password:password.trim()})
-if(request.data=='done'){
+if(request.data=='done' || request.data=='bc'){
   setwarn(true)
 }
 else{
