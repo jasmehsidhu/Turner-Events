@@ -274,6 +274,9 @@ function select(e){
   ) {
     return true;
   }
+  else{
+    console.log(e.target.value.slice(0, 3), e.target.value.slice(-4))
+  }
 }
   })
   setallevents(newarr)
@@ -293,10 +296,10 @@ function select(e){
       <input onChange={change} placeholder='Search events' type='text' id='search'></input>
       <select onChange={select} id='dropbox'>
         <option>All</option>
-        <option value='Sep 2025'>Apr 2026</option>
-        <option value='Oct 2025'>May 2026</option>
-        <option value='Nov 2025'>Jun 2026</option>
-        <option value='Dec 2025'>Jul 2026</option>
+        <option value='Apr 2026'>Apr 2026</option>
+        <option value='May 2026'>May 2026</option>
+        <option value='Jun 2026'>Jun 2026</option>
+        <option value='Jul 2026'>Jul 2026</option>
       </select>
     </div>
     <div id='main'>
@@ -403,4 +406,3 @@ return(
 }
 
 export default App
-
