@@ -16,7 +16,7 @@ function App() {
 useEffect(()=>{
  async function fetchData(){
   showload(true)
-    var request=await axios.get('https://event-app-8.onrender.com/')
+    var request=await axios.get('http://10.0.0.65:2000/')
     var m=request.data
     for(var x=0;x<m.length;x++){
          m.forEach((item,index)=>{
